@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".data.Provider"
+            android:authorities="com.example.akl.inventoryapp"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddItemActivity"
+            android:label="Add new Item"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>
