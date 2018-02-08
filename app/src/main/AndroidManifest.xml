@@ -23,9 +23,15 @@
             android:exported="false" />
 
         <activity
-            android:name=".AddItemActivity"
-            android:label="Add new Item"
+            android:name=".DetailActivity"
+            android:label="Item Detail"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".EditActivity"
+            android:label="Edit Item"
             android:parentActivityName=".MainActivity"/>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
     </application>
 
 </manifest>

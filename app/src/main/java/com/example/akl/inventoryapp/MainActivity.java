@@ -7,12 +7,9 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AddItemActivity.class);
+                Intent intent = new Intent(MainActivity.this,EditActivity.class);
                 startActivity(intent);
             }
         });
@@ -46,9 +43,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-             Intent intent = new Intent();
-             intent.putExtra(BookEntry._ID,id);
-             intent.setData(ContentUris.withAppendedId(BookEntry.CONTENT_URI,id));
+                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
+                intent.putExtra(BookEntry._ID,id);
+                intent.setData(ContentUris.withAppendedId(BookEntry.CONTENT_URI,id));
+                startActivity(intent);
             }
         });
         getLoaderManager().initLoader(0,null,this);

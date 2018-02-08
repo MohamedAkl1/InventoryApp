@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:paddingLeft="6dp"
+    tools:context="com.example.akl.inventoryapp.DetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/item_name_header"/>
+
+        <EditText
+            style="@style/EditorFieldStyle"
+            android:hint="@string/item_names"
+            android:id="@+id/edit_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/detail_price"/>
+
+        <EditText
+            style="@style/EditorFieldStyle"
+            android:hint="@string/item_price"
+            android:inputType="numberDecimal"
+            android:id="@+id/edit_price"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/detail_quantity"/>
+
+        <EditText
+            style="@style/EditorFieldStyleModified"
+            android:id="@+id/edit_quantity"
+            android:hint="@string/item_quantity"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/detail_supplier_name"/>
+
+        <EditText
+            style="@style/EditorFieldStyle"
+            android:hint="@string/supplier_name"
+            android:id="@+id/edit_supplier_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/detail_supplier_email"/>
+
+        <EditText
+            style="@style/EditorFieldStyle"
+            android:hint="@string/supplier_email"
+            android:id="@+id/edit_supplier_email"
+            android:inputType="textEmailAddress"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/detail_supplier_phone"/>
+
+        <EditText
+            style="@style/EditorFieldStyle"
+            android:id="@+id/edit_supplier_phone"
+            android:inputType="phone"
+            android:hint="@string/supplier_phone"/>
+    </LinearLayout>
+</LinearLayout>
