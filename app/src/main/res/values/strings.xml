@@ -28,4 +28,6 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="message_supplier">Message Supplier</string>
+    <string name="empty_view_title_text">No Items Available</string>
+    <string name="empty_view_subtitle_text">Press on the FAB or choose insert new dummy to add items</string>
 </resources>

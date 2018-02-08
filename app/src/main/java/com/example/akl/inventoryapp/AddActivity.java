@@ -1,13 +1,10 @@
 package com.example.akl.inventoryapp;
 
 import android.app.AlertDialog;
-import android.app.LoaderManager;
 import android.content.ContentValues;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
+import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,23 +18,23 @@ import android.widget.Toast;
 
 import com.example.akl.inventoryapp.data.BookContract.BookEntry;
 
-public class EditActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class AddActivity extends AppCompatActivity {
 
     EditText etName,etQuantity,etPrice,etSupplierName,etSupplierEmail,etSupplierPhone;
+    Uri mUri;
     boolean itemChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.activity_add);
 
-        etName = findViewById(R.id.edit_name);
-        etPrice = findViewById(R.id.edit_price);
-        etQuantity = findViewById(R.id.edit_quantity);
-        etSupplierName = findViewById(R.id.edit_supplier_name);
-        etSupplierEmail = findViewById(R.id.edit_supplier_email);
-        etSupplierPhone = findViewById(R.id.edit_supplier_phone);
-        getLoaderManager().initLoader(0,null,this);
+        etName = findViewById(R.id.edit_name2);
+        etPrice = findViewById(R.id.edit_price2);
+        etQuantity = findViewById(R.id.edit_quantity2);
+        etSupplierName = findViewById(R.id.edit_supplier_name2);
+        etSupplierEmail = findViewById(R.id.edit_supplier_email2);
+        etSupplierPhone = findViewById(R.id.edit_supplier_phone2);
 
         etName.setOnTouchListener(mTouchListener);
         etPrice.setOnTouchListener(mTouchListener);
@@ -45,25 +42,6 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         etSupplierPhone.setOnTouchListener(mTouchListener);
         etSupplierEmail.setOnTouchListener(mTouchListener);
         etSupplierName.setOnTouchListener(mTouchListener);
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        if(getIntent().getData() != null){
-            return new CursorLoader(getApplicationContext(),
-                    getIntent().getData(),
-                    null,
-                    null,
-                    null,
-                    null);
-        }else {
-            return new CursorLoader(getApplicationContext(),
-                    BookEntry.CONTENT_URI,
-                    null,
-                    null,
-                    null,
-                    null);
-        }
     }
 
     @Override
@@ -106,23 +84,9 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if(getIntent().getData() != null){
-            if(cursor.moveToFirst()){
-                etName.setText(cursor.getString(cursor.getColumnIndexOrThrow(BookEntry.BOOK_COLUMN_NAME)));
-                etPrice.setText(cursor.getString(cursor.getColumnIndexOrThrow(BookEntry.BOOK_COLUMN_PRICE)));
-                etQuantity.setText(cursor.getString(cursor.getColumnIndexOrThrow(BookEntry.BOOK_COLUMN_QUANTITY)));
-                etSupplierName.setText(cursor.getString(cursor.getColumnIndexOrThrow(BookEntry.BOOK_COLUMN_SUPPLIER_NAME)));
-                etSupplierEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(BookEntry.BOOK_COLUMN_SUPPLIER_EMAIL)));
-                etSupplierPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(BookEntry.BOOK_COLUMN_SUPPLIER_PHONE)));
-            }
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.edit_activity_menu,menu);
-    return true;
+        getMenuInflater().inflate(R.menu.edit_activity_menu,menu);
+        return true;
     }
 
     @Override
@@ -141,7 +105,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
                 DialogInterface.OnClickListener discardButtonClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(EditActivity.this,DetailActivity.class);
+                        Intent intent = new Intent(AddActivity.this,MainActivity.class);
                         intent.setData(getIntent().getData());
                         startActivity(intent);
                     }
@@ -192,24 +156,8 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         values.put(BookEntry.BOOK_COLUMN_SUPPLIER_NAME,itemSupplierName);
         values.put(BookEntry.BOOK_COLUMN_SUPPLIER_EMAIL,itemSupplierEmail);
         values.put(BookEntry.BOOK_COLUMN_SUPPLIER_PHONE,supplierPhoneInt);
-        if(getIntent().getData() != null){
-            getContentResolver().update(getIntent().getData(),
-                    values,
-                    null,
-                    null);
-            Toast.makeText(this, "item edited",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        etName.setText("");
-        etPrice.setText("");
-        etQuantity.setText("");
-        etSupplierName.setText("");
-        etSupplierEmail.setText("");
-        etSupplierPhone.setText("");
+        mUri = getContentResolver().insert(BookEntry.CONTENT_URI,values);
+        Toast.makeText(this, "Item saved successfully",Toast.LENGTH_SHORT).show();
+        return true;
     }
 }

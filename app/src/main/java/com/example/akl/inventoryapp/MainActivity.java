@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,EditActivity.class);
+                Intent intent = new Intent(MainActivity.this,AddActivity.class);
                 startActivity(intent);
             }
         });
@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(intent);
             }
         });
+        View emptyView = findViewById(R.id.empty_view);
+        lv.setEmptyView(emptyView);
         getLoaderManager().initLoader(0,null,this);
     }
 
